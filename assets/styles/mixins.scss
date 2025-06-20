@@ -1,0 +1,42 @@
+// TYPOGRAPHY MIXIN
+@mixin text-style($font-size, $line-height, $font-family, $letter-spacing: 0px) {
+  font-size: $font-size;
+  line-height: $line-height;
+  font-family: $font-family;
+  letter-spacing: $letter-spacing;
+}
+
+// TEXT PRESETS
+@mixin text-1 { @include text-style(144px, 171.9%, $font-serif); }
+@mixin text-2 { @include text-style(100px, 114.6%, $font-serif); }
+@mixin text-3 { @include text-style(56px, 64.2%, $font-serif); }
+@mixin text-4 { @include text-style(32px, 36.7%, $font-serif); }
+@mixin text-5 { @include text-style(28px, 33.6%, $font-sans-condensed, 4px); }
+@mixin text-6 { @include text-style(28px, 32.1%, $font-serif); }
+@mixin text-7 { @include text-style(14px, 16.8%, $font-sans-condensed, 2px); }
+@mixin text-8 { @include text-style(16px, 19.2%, $font-sans-condensed, 2px); }
+@mixin text-9 { @include text-style(18px, 180%, $font-sans); }
+
+// SPACING MIXIN
+@mixin spacing($property, $size) {
+  #{$property}: map-get((
+    1600: 128px, 1200: 96px, 1000: 80px, 800: 64px,
+    600: 48px, 500: 40px, 400: 32px, 300: 24px,
+    200: 16px, 150: 12px, 100: 8px, 50: 4px, 25: 2px
+  ), $size);
+}
+
+// MEDIA QUERY HELPERS
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px
+);
+
+@mixin respond($breakpoint) {
+  @media (min-width: map-get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
