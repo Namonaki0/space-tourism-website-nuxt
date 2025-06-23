@@ -40,3 +40,26 @@ $breakpoints: (
     @content;
   }
 }
+
+// BACKGROUND MIXIN
+$bg-variants: (
+  mobile: (suffix: '-mobile', media: null), // base
+  tablet: (suffix: '-tablet', media: '(min-width: 768px)'),
+  desktop: (suffix: '-desktop', media: '(min-width: 1280px)')
+);
+
+@mixin responsive-bg($base-name, $ext: 'jpg') {
+  @each $key, $config in $bg-variants {
+    $suffix: map-get($config, suffix);
+    $media: map-get($config, media);
+    $url: url('~/assets/images/#{$base-name}/background-#{$base-name}#{$suffix}.#{$ext}') no-repeat center center fixed;
+
+    @if $media == null {
+      background: $url;
+    } @else {
+      @media #{$media} {
+        background: $url;
+      }
+    }
+  }
+}

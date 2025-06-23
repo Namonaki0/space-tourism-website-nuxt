@@ -2,6 +2,7 @@
 $blue-900: #0b0d17;
 $blue-300: #d0d6f9;
 $white: #ffffff;
+$selected: #ffffff80;
 
 // TYPOGRAPHY
 $font-serif: 'Bellefair', serif;
@@ -33,3 +34,9 @@ $spacing-150: 12px;
 $spacing-100: 8px;
 $spacing-50: 4px;
 $spacing-25: 2px;
+
+// VIEWPORT BREAKPOINTS
+$breakpoint-mobile: 375px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+$breakpoint-desktop-lg: 1440px;
