@@ -74,7 +74,6 @@
       }
 
       @media (min-width: $breakpoint-desktop) {
-        // margin-bottom: 0;
         margin: 0;
       }
     }
