@@ -72,13 +72,13 @@ watch(
           width: 100px;
           height: 100px;
           border-radius: 50%;
-          background: white;
+          background: $white;
           display: grid;
           place-content: center;
 
           &.router-link-active,
           &.router-link-exact-active {
-            background: white;
+            background: $white;
           }
           
           .bubble-link {
@@ -89,10 +89,11 @@ watch(
             text-decoration: none;
             display: grid;
             place-content: center;
+            cursor: pointer;
 
             span {
               @include text-4;
-              color: black;
+              color: $blue-900;
             }
           }
         }

@@ -1,9 +1,11 @@
 <script setup lang="ts">
 const menuOpen = ref(false);
 const isMobile = ref(false);
+const isTablet = ref(false);
 
 function handleResize() {
   isMobile.value = window.innerWidth < 768
+  isTablet.value = window.innerWidth >= 768 && window.innerWidth < 1024
 }
 
 function handleClickOutside(event: MouseEvent) {
@@ -52,7 +54,7 @@ watch(
     </Transition>
     <div v-else class="navbar-wrapper">
     <img class="close-menu" src="~/assets/images/shared/icon-close.svg" alt="close menu icon" @click="menuOpen = false">
-        <NuxtLink to="/" title="Home" active-class="active" :exact="false"><span>00 </span>Home</NuxtLink>
+        <NuxtLink to="/" title="Home" active-class="active" :exact="false"><span v-if="!isTablet">00 </span>Home</NuxtLink>
         <NuxtLink to="/destination/moon" title="Destination" active-class="active" :exact="false"><span>01 </span>Destination</NuxtLink>
         <NuxtLink to="/crew/1" title="Crew" active-class="active" :exact="false"><span>02 </span>Crew</NuxtLink>
         <NuxtLink to="/technology/1" title="Technology" active-class="active" :exact="false"><span>03 </span>Technology</NuxtLink>
@@ -81,18 +83,20 @@ watch(
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
+    z-index: 1;
 
     @media (min-width: $breakpoint-tablet) {
         position: relative;
         height: auto;
         flex-direction: row;
         width: 100%;
-        justify-content: space-around;
+        justify-content: flex-end;
         padding: 0;
     }
 
     @media (min-width: $breakpoint-desktop) {
         width: max-content;
+        justify-content: space-around;
         gap: 48px;
     }
 
@@ -129,8 +133,10 @@ watch(
 
         @media (min-width: $breakpoint-tablet) {
             margin-bottom: 0;
+            margin-right: 3rem;
             padding: 2.8rem 0;
             border-bottom: 5px solid transparent;
+            width: max-content;
         }
 
         @media (min-width: $breakpoint-desktop) {
