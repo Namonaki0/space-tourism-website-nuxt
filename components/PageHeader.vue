@@ -28,7 +28,7 @@
       background-color: #979797;
       opacity: 0.25;
       margin: 0;
-      z-index: 1;
+      z-index: 2;
       margin-right: -40px;
       margin-top: -3px;
 
