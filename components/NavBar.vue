@@ -44,18 +44,18 @@ watch(
     <Transition v-if="isMobile" name="slide">
         <div v-if="menuOpen" class="navbar-wrapper">
             <img class="close-menu" src="~/assets/images/shared/icon-close.svg" alt="close menu icon" @click="menuOpen = false">
-            <NuxtLink to="/" title="Home"><span>00 </span>Home</NuxtLink>
-            <NuxtLink to="/destination/moon" title="Destination"><span>01 </span>Destination</NuxtLink>
-            <NuxtLink to="/crew/1" title="Crew"><span>02 </span>Crew</NuxtLink>
-            <NuxtLink to="/technology/1" title="Technology"><span>03 </span>Technology</NuxtLink>
+            <NuxtLink to="/" title="Home" active-class="active" :exact="false"><span>00 </span>Home</NuxtLink>
+            <NuxtLink to="/destination/moon" title="Destination" active-class="active" :exact="false"><span>01 </span>Destination</NuxtLink>
+            <NuxtLink to="/crew/1" title="Crew" active-class="active" :exact="false"><span>02 </span>Crew</NuxtLink>
+            <NuxtLink to="/technology/1" title="Technology" active-class="active" :exact="false"><span>03 </span>Technology</NuxtLink>
         </div>
     </Transition>
     <div v-else class="navbar-wrapper">
     <img class="close-menu" src="~/assets/images/shared/icon-close.svg" alt="close menu icon" @click="menuOpen = false">
-        <NuxtLink to="/" title="Home"><span>00 </span>Home</NuxtLink>
-        <NuxtLink to="/destination/moon" title="Destination"><span>01 </span>Destination</NuxtLink>
-        <NuxtLink to="/crew/1" title="Crew"><span>02 </span>Crew</NuxtLink>
-        <NuxtLink to="/technology/1" title="Technology"><span>03 </span>Technology</NuxtLink>
+        <NuxtLink to="/" title="Home" active-class="active" :exact="false"><span>00 </span>Home</NuxtLink>
+        <NuxtLink to="/destination/moon" title="Destination" active-class="active" :exact="false"><span>01 </span>Destination</NuxtLink>
+        <NuxtLink to="/crew/1" title="Crew" active-class="active" :exact="false"><span>02 </span>Crew</NuxtLink>
+        <NuxtLink to="/technology/1" title="Technology" active-class="active" :exact="false"><span>03 </span>Technology</NuxtLink>
     </div>
 </template>
 <style scoped lang="scss">
@@ -141,6 +141,15 @@ watch(
                 margin-right: 64px;
             }
         }
+
+        .active {
+            border-right: 5px solid $selected;
+
+            @media (min-width: $breakpoint-tablet) {
+                border-right: none;
+                border-bottom: 5px solid $selected;
+            }
+        }
     }
 
     .close-menu {
@@ -152,7 +161,8 @@ watch(
         }
     }
 
-    .router-link-active {
+    .router-link-active,
+    .router-link-exact-active {
         border-right: 5px solid $selected;
 
         @media (min-width: $breakpoint-tablet) {

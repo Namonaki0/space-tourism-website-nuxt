@@ -52,7 +52,7 @@ $bg-variants: (
   @each $key, $config in $bg-variants {
     $suffix: map-get($config, suffix);
     $media: map-get($config, media);
-    $url: url('~/assets/images/#{$base-name}/background-#{$base-name}#{$suffix}.#{$ext}') no-repeat center center fixed;
+    $url: url('/images/#{$base-name}/background-#{$base-name}#{$suffix}.#{$ext}') no-repeat center center fixed;
 
     @if $media == null {
       background: $url;
