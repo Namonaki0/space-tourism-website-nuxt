@@ -13,7 +13,7 @@ if (!data) {
 </script>
 
 <template>
-  <div class="destination-page">
+  <div class="destination template-padding-top">
     <h1><span>01</span> PICK YOUR DESTINATION</h1>
 
     <div class="image">
@@ -26,6 +26,8 @@ if (!data) {
         :key="key"
         :to="`/destination/${key}`"
         :class="{ active: key === planetParam }"
+        active-class="router-link-active"
+        exact-active-class="router-link-exact-active"
       >
         {{ key.toUpperCase() }}
       </NuxtLink>
@@ -48,3 +50,9 @@ if (!data) {
     </div>
   </div>
 </template>
+<style scoped lang="scss">
+.destination {
+  height: 100dvh;
+  @include responsive-bg('destination');
+}
+</style>
