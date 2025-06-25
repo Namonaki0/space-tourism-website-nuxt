@@ -23,10 +23,11 @@ watch(
     <h1 class="section-title"><span>02</span> Meet your crew</h1>
     <section class="crew-wrapper">
       <div class="crew-info">
-        <p class="role">{{ member.role }}</p>
-        <h2 class="name">{{ member.name }}</h2>
-        <p class="description">{{ member.description }}</p>
-
+        <div class="crew-info-data">
+          <p class="role">{{ member.role }}</p>
+          <p class="name">{{ member.name }}</p>
+          <p class="description">{{ member.description }}</p>
+        </div>
         <ul class="pagination-dots">
           <li
             v-for="(_, index) in crew"
@@ -50,12 +51,10 @@ watch(
   display: flex;
   flex-direction: column;
   @include responsive-bg('crew');
+  @include page-padding;
 
   .section-title {
-    text-transform: uppercase;
-    font-size: 1rem;
-    letter-spacing: 2px;
-    margin-bottom: 2rem;
+    @include page-header-title;
 
     span {
       font-weight: bold;
@@ -66,40 +65,83 @@ watch(
 
   .crew-wrapper {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 2rem;
 
-    @media (min-width: 768px) {
+    @media (min-width: $breakpoint-tablet) {
       flex-direction: row;
       align-items: end;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media (min-width: $breakpoint-desktop) {
+      flex-direction: row;
+      align-items: center;
+      width: 1110px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .crew-info {
       max-width: 500px;
       text-align: center;
 
-      @media (min-width: 768px) {
+      @media (min-width: $breakpoint-desktop) {
         text-align: left;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
       }
 
-      .role {
-        font-size: 1rem;
-        text-transform: uppercase;
-        color: #aaa;
-      }
+      .crew-info-data {
+        @media (min-width: $breakpoint-desktop) {
+          height: 40%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+        }
 
-      .name {
-        font-size: 2.5rem;
-        text-transform: uppercase;
-        margin: 0.5rem 0;
-      }
+        .role {
+          font-size: 1rem;
+          text-transform: uppercase;
+          color: #aaa;
+          @include text-4;
+          font-size: clamp(1.5rem, 3.5vw, 1.8rem);
+          line-height: unset;
+          margin-bottom: 12px;
 
-      .description {
-        font-size: 1rem;
-        line-height: 1.6;
-        color: #ccc;
+          @media (min-width: $breakpoint-desktop) {
+            margin-bottom: 0;
+          }
+        }
+  
+        .name {
+          font-size: 2.5rem;
+          text-transform: uppercase;
+          margin: 0.5rem 0 2rem;
+          @include text-3;
+          font-size: clamp(1.9rem, 6vw, 3.1rem);
+          line-height: 93.2%;
+
+          @media (min-width: $breakpoint-desktop) {
+            margin-bottom: 1.5rem;
+          }
+        }
+  
+        .description {
+          @include header-description;
+  
+          @media (min-width: $breakpoint-desktop) {
+            font-size: 18px;
+            margin-bottom: 0;
+            padding-bottom: 0;
+          }
+        }
       }
 
       .pagination-dots {
@@ -108,11 +150,18 @@ watch(
         margin-top: 2rem;
         justify-content: center;
 
+        @media (min-width: $breakpoint-desktop) {
+          justify-content: flex-start;
+          gap: 2.5rem;
+          margin-top: auto;
+          height: 12%;
+        }
+
         li {
           width: 10px;
           height: 10px;
           border-radius: 50%;
-          background: white;
+          background: $mute-grey;
 
           &.router-link-active {
             background: white;
@@ -130,10 +179,32 @@ watch(
     }
 
     .crew-image {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.444) 0%,
+          rgba(0, 0, 0, 0) 25%,
+          rgba(0, 0, 0, 0) 10%,
+          rgba(0, 0, 0, 0) 90%
+        );
+      }
+
       img {
+        width: 100%;
         height: auto;
-        max-height: 400px;
-        object-fit: contain;
+        position: relative;
+        z-index: 0;
+
       }
     }
   }

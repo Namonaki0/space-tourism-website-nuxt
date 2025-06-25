@@ -24,7 +24,6 @@
   @include responsive-bg('home');
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  color: $blue-300;
 
   .home-wrapper {
     text-align: center;
@@ -35,34 +34,36 @@
       }
 
       h2 {
-      .eyebrow {
-        @include text-5;
-        font-weight: 100;
-        display: block;
-        text-transform: uppercase;
+        .eyebrow {
+          @include text-5;
+          font-weight: 100;
+          display: block;
+          text-transform: uppercase;
+          color: $blue-300;
 
-        @media (min-width: $breakpoint-tablet) {
-          font-size: 20px;
+          @media (min-width: $breakpoint-tablet) {
+            font-size: 20px;
+          }
+
+          @media (min-width: $breakpoint-desktop) {
+            margin-bottom: .6rem;
+          }
         }
 
-        @media (min-width: $breakpoint-desktop) {
-          margin-bottom: .6rem;
-        }
-      }
+        .hero-title {
+          @include text-1;
+          font-weight: 100;
+          color: $white;
+          margin-left: -8px;
 
-      .hero-title {
-        @include text-1;
-        font-weight: 100;
-        color: $white;
-        margin-left: -8px;
-
-        @media (min-width: $breakpoint-tablet) {
-          font-size: 108px;
+          @media (min-width: $breakpoint-tablet) {
+            font-size: 108px;
+          }
         }
-      }
     }
 
     .hero-description {
+      @include header-description;
       @include text-9;
       margin-top: 0.5rem;
       margin: 0 auto 119px;
@@ -75,6 +76,7 @@
 
       @media (min-width: $breakpoint-desktop) {
         margin: 0;
+        font-size: 16px;
       }
     }
     }

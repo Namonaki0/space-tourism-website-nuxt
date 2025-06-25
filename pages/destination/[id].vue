@@ -14,7 +14,7 @@ if (!data) {
 
 <template>
   <div class="destination template-padding-top">
-    <h1><span>01</span> PICK YOUR DESTINATION</h1>
+    <h1 class="section-title"><span>01</span> PICK YOUR DESTINATION</h1>
     <div class="destination-inner">
       <AppImage :data="data" />
       <div class="destination-inner-data">
@@ -54,12 +54,15 @@ if (!data) {
 .destination {
   min-height: 100dvh;
   @include responsive-bg('destination');
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  @include page-padding;
   text-align: center;
 
   @media (min-width: $breakpoint-tablet) {
     padding-bottom: 40px;
+  }
+
+  @media (min-width: $breakpoint-desktop) {
+    padding-bottom: 0;
   }
 
   .destination-inner {
@@ -78,25 +81,11 @@ if (!data) {
     }
   }
 
-  h1 {
-    font-size: 20px;
-    font-weight: 100;
-    letter-spacing: 1px;
-    margin-bottom: 50.5px;
-
-    @media (min-width: $breakpoint-tablet) {
-      text-align: left;
-      margin-left: 1rem;
-    }
-
-    @media (min-width: $breakpoint-desktop) {
-      width: 1110px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+  .section-title {
+    @include page-header-title;
 
     span {
-      color: $span;
+      color: $mute-grey;
       font-weight: 600;
       margin-right: 24px;
     }
@@ -169,13 +158,8 @@ if (!data) {
     }
     
     .description {
-      font-size: 17px;
-      color: $blue-300;
-      letter-spacing: 1px;
-      padding-bottom: 24px;
+      @include header-description;
       border-bottom: 1px solid $separator;
-      margin-bottom: 24px;
-      font-weight: 100;
 
       @media (min-width: $breakpoint-desktop) {
         font-size: 20px;
