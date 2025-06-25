@@ -62,6 +62,16 @@ watch(
   height: 100dvh;
   @include responsive-bg('technology');
 
+  .section-title {
+    @include page-header-title;
+
+    span {
+      font-weight: bold;
+      opacity: 0.25;
+      margin-right: 1rem;
+    }
+  }
+
   .pagination-bubbles {
         display: flex;
         gap: 0.5rem;
