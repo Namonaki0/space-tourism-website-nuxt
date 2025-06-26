@@ -1,51 +1,56 @@
 <script setup lang="ts">
 import { destinations } from '@/data/destinations'
 
-const route = useRoute()
-const router = useRouter()
+const destinationIndex = ref(0)
+const selectedDestination = computed(() => destinations[destinationIndex.value])
 
-const planetParam = route.params.id
-const data = destinations[planetParam as keyof typeof destinations]
-
-if (!data) {
-  router.push('/destination/moon')
+function selectDestination(index: number) {
+  destinationIndex.value = index
 }
-</script>
 
+onMounted(() => {
+  destinationIndex.value = 0
+})
+</script>
 <template>
   <div class="destination template-padding-top">
     <h1 class="section-title"><span>01</span> PICK YOUR DESTINATION</h1>
     <div class="destination-inner">
-      <AppImage :data="data" />
+      <Transition name="fade-slide" mode="out-in">
+        <AppImage 
+        :key="destinationIndex"
+        :data="selectedDestination" 
+        />
+      </Transition>
       <div class="destination-inner-data">
-        <nav class="tabs">
-          <NuxtLink
-            v-for="(val, key) in destinations"
-            :key="key"
-            :to="`/destination/${key}`"
-            :class="{ active: key === planetParam }"
-            active-class="router-link-active"
-            exact-active-class="router-link-exact-active"
+        <nav :key="destinationIndex" class="tabs">
+          <button
+            v-for="(dest, index) in destinations"
+            :key="dest.id"
+            :class="{ active: index === destinationIndex }"
+            class="crew-info-data"
+            @click="selectDestination(index)"
           >
-            {{ key.toUpperCase() }}
-          </NuxtLink>
+            {{ dest.name.toUpperCase() }}
+          </button>
         </nav>
+        <Transition name="fade-slide" mode="out-in">
+          <div :key="destinationIndex" class="destination-content">
+            <p class="name">{{ selectedDestination.name }}</p>
+            <p class="description">{{ selectedDestination.description }}</p>
 
-        <div class="destination-content">
-          <p class="name">{{ data.name }}</p>
-          <p class="description">{{ data.description }}</p>
-
-          <div class="meta">
-            <div>
-              <h3>AVG. DISTANCE</h3>
-              <p>{{ data.distance }}</p>
-            </div>
-            <div>
-              <h3>EST. TRAVEL TIME</h3>
-              <p>{{ data.travelTime }}</p>
+            <div class="meta">
+              <div>
+                <h3>AVG. DISTANCE</h3>
+                <p>{{ selectedDestination.distance }}</p>
+              </div>
+              <div>
+                <h3>EST. TRAVEL TIME</h3>
+                <p>{{ selectedDestination.travelTime }}</p>
+              </div>
             </div>
           </div>
-        </div>
+        </Transition>
       </div>
     </div>
   </div>
@@ -108,13 +113,14 @@ if (!data) {
       justify-content: flex-start;
     }
 
-    a {
+    button {
       padding-bottom: 15px;
       border-bottom: 3px solid transparent;
-      color: $white;
       text-decoration: none;
       transition: all 0.3s ease-in-out;
       color: $blue-300;
+      letter-spacing: 1px;
+      padding: 0 0 10px;
 
       &:hover,
       &.focus {
@@ -122,7 +128,7 @@ if (!data) {
         color: $white;
       }
 
-      &.router-link-active {
+      &.active {
         border-bottom: 3px solid $selected;
         color: $white;
       }
@@ -187,10 +193,25 @@ if (!data) {
 
       p {
         @include text-6;
-        margin-bottom: 24px;
+        padding-bottom: 24px;
         line-height: unset;
       }
     }
   }
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.4s, transform 0.4s;
+}
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.fade-slide-enter-to,
+.fade-slide-leave-from {
+  opacity: 1;
+  transform: translateX(0);
 }
 </style>

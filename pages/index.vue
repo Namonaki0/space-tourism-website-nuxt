@@ -12,7 +12,7 @@
           </p>
         </div>
         <div class="bubble-link-wrapper">
-          <NuxtLink to="/destination/moon" title="explore" class="bubble-link" active-class="router-link-active" exact-active-class="router-link-exact-active">Explore</NuxtLink>
+          <NuxtLink to="/destination" title="explore" class="bubble-link" active-class="router-link-active" exact-active-class="router-link-exact-active">Explore</NuxtLink>
         </div>
       </div>
     </div>
@@ -64,7 +64,7 @@
 
     .hero-description {
       @include header-description;
-      @include text-9;
+      // @include text-9;
       margin-top: 0.5rem;
       margin: 0 auto 119px;
 
@@ -76,7 +76,7 @@
 
       @media (min-width: $breakpoint-desktop) {
         margin: 0;
-        font-size: 16px;
+        font-size: 19px;
       }
     }
     }
