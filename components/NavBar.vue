@@ -47,17 +47,17 @@ watch(
         <div v-if="menuOpen" class="navbar-wrapper">
             <img class="close-menu" src="~/assets/images/shared/icon-close.svg" alt="close menu icon" @click="menuOpen = false">
             <NuxtLink to="/" title="Home" active-class="active" :exact="false"><span>00 </span>Home</NuxtLink>
-            <NuxtLink to="/destination/moon" title="Destination" active-class="active" :exact="false"><span>01 </span>Destination</NuxtLink>
-            <NuxtLink to="/crew/1" title="Crew" active-class="active" :exact="false"><span>02 </span>Crew</NuxtLink>
-            <NuxtLink to="/technology/1" title="Technology" active-class="active" :exact="false"><span>03 </span>Technology</NuxtLink>
+            <NuxtLink to="/destination" title="Destination" active-class="active" :exact="false"><span>01 </span>Destination</NuxtLink>
+            <NuxtLink to="/crew" title="Crew" active-class="active" :exact="false"><span>02 </span>Crew</NuxtLink>
+            <NuxtLink to="/technology" title="Technology" active-class="active" :exact="false"><span>03 </span>Technology</NuxtLink>
         </div>
     </Transition>
     <div v-else class="navbar-wrapper">
     <img class="close-menu" src="~/assets/images/shared/icon-close.svg" alt="close menu icon" @click="menuOpen = false">
         <NuxtLink to="/" title="Home" active-class="active" :exact="false"><span v-if="!isTablet">00 </span>Home</NuxtLink>
-        <NuxtLink to="/destination/moon" title="Destination" active-class="active" :exact="false"><span>01 </span>Destination</NuxtLink>
-        <NuxtLink to="/crew/1" title="Crew" active-class="active" :exact="false"><span>02 </span>Crew</NuxtLink>
-        <NuxtLink to="/technology/1" title="Technology" active-class="active" :exact="false"><span>03 </span>Technology</NuxtLink>
+        <NuxtLink to="/destination" title="Destination" active-class="active" :exact="false"><span>01 </span>Destination</NuxtLink>
+        <NuxtLink to="/crew" title="Crew" active-class="active" :exact="false"><span>02 </span>Crew</NuxtLink>
+        <NuxtLink to="/technology" title="Technology" active-class="active" :exact="false"><span>03 </span>Technology</NuxtLink>
     </div>
 </template>
 <style scoped lang="scss">

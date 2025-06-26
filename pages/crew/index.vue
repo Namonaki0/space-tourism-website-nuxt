@@ -1,47 +1,47 @@
 <script setup lang="ts">
 import { crew } from '@/data/crew'
 
-const member = ref(crew[0])
 const memberIndex = ref(0)
+const member = computed(() => crew[memberIndex.value])
 
-watch(
-  () => useRoute().params.id,
-  (newId) => {
-    const index = parseInt(newId as string) - 1
-    if (isNaN(index) || !crew[index]) {
-      useRouter().replace('/crew/1')
-    } else {
-      memberIndex.value = index
-      member.value = crew[index]
-    }
-  },
-  { immediate: true }
-)
+function setActiveMember(index: number) {
+  memberIndex.value = index
+}
+onMounted(() => {
+  memberIndex.value = 0;
+});
 </script>
 <template>
   <div class="crew template-padding-top">
     <h1 class="section-title"><span>02</span> Meet your crew</h1>
     <section class="crew-wrapper">
       <div class="crew-info">
-        <div class="crew-info-data">
-          <p class="role">{{ member.role }}</p>
-          <p class="name">{{ member.name }}</p>
-          <p class="description">{{ member.description }}</p>
-        </div>
+        <Transition name="fade-slide" mode="out-in">
+            <div :key="memberIndex" class="crew-info-data">
+                <p class="role">{{ member.role }}</p>
+                <p class="name">{{ member.name }}</p>
+                <p class="description">{{ member.description }}</p>
+            </div>
+        </Transition>
         <ul class="pagination-dots">
           <li
             v-for="(_, index) in crew"
             :key="index"
-            :class="{ 'router-link-active': index === memberIndex }"
+            :class="{ 'active': index === memberIndex }"
           >
-            <NuxtLink :to="`/crew/${index + 1}`" class="dot-link" active-class="router-link-active" exact-active-class="router-link-exact-active"/>
+            <button
+              class="dot-cta"
+              :aria-label="`Go to crew member ${index + 1}`"
+              @click="setActiveMember(index)"
+            />
           </li>
         </ul>
       </div>
-
-      <div class="crew-image">
-        <img :src="member.image" :alt="member.name">
-      </div>
+      <Transition name="fade-slide" mode="out-in">
+        <div :key="memberIndex" class="crew-image">
+            <img :src="member.image" :alt="member.name">
+        </div>
+      </Transition>
     </section>
   </div>
 </template>
@@ -107,10 +107,9 @@ watch(
         }
 
         .role {
-          font-size: 1rem;
+          @include text-4;
           text-transform: uppercase;
           color: #aaa;
-          @include text-4;
           font-size: clamp(1.5rem, 3.5vw, 1.8rem);
           line-height: unset;
           margin-bottom: 12px;
@@ -121,10 +120,10 @@ watch(
         }
   
         .name {
+          @include text-3;
           font-size: 2.5rem;
           text-transform: uppercase;
           margin: 0.5rem 0 2rem;
-          @include text-3;
           font-size: clamp(1.9rem, 6vw, 3.1rem);
           line-height: 93.2%;
 
@@ -163,11 +162,11 @@ watch(
           border-radius: 50%;
           background: $mute-grey;
 
-          &.router-link-active {
+          &.active {
             background: white;
           }
           
-          .dot-link {
+          .dot-cta {
             cursor: pointer;
             display: block;
             border-radius: 50%;
@@ -208,5 +207,20 @@ watch(
       }
     }
   }
+}
+
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.4s, transform 0.4s;
+}
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+.fade-slide-enter-to,
+.fade-slide-leave-from {
+  opacity: 1;
+  transform: translateX(0);
 }
 </style>
