@@ -7,11 +7,11 @@
 }
 
 // TEXT PRESETS
-@mixin text-1 { @include text-style(144px, 171.9%, $font-serif); }
+@mixin text-1 { @include text-style(90px, 145%, $font-serif); }
 @mixin text-2 { @include text-style(100px, 114.6%, $font-serif); }
 @mixin text-3 { @include text-style(56px, 64.2%, $font-serif); }
 @mixin text-4 { @include text-style(32px, 36.7%, $font-serif); }
-@mixin text-5 { @include text-style(28px, 33.6%, $font-sans-condensed, 4px); }
+@mixin text-5 { @include text-style(16px, 33.6%, $font-sans-condensed, 4px); }
 @mixin text-6 { @include text-style(28px, 32.1%, $font-serif); }
 @mixin text-7 { @include text-style(14px, 16.8%, $font-sans-condensed, 2px); }
 @mixin text-8 { @include text-style(16px, 19.2%, $font-sans-condensed, 2px); }
@@ -52,7 +52,7 @@ $bg-variants: (
   @each $key, $config in $bg-variants {
     $suffix: map-get($config, suffix);
     $media: map-get($config, media);
-    $url: url('/images/#{$base-name}/background-#{$base-name}#{$suffix}.#{$ext}') no-repeat center center fixed;
+    $url: center / cover no-repeat url('/images/#{$base-name}/background-#{$base-name}#{$suffix}.#{$ext}');
 
     @if $media == null {
       background: $url;
@@ -62,4 +62,40 @@ $bg-variants: (
       }
     }
   }
+}
+
+// PAGE HEADER TITLE
+@mixin page-header-title {
+  font-size: 20px;
+  font-weight: 100;
+  letter-spacing: 1px;
+  margin-bottom: 50.5px;
+  text-align: center;
+  text-transform: uppercase;
+
+  @media (min-width: $breakpoint-tablet) {
+    text-align: left;
+    margin-left: 1rem;
+  }
+
+  @media (min-width: $breakpoint-desktop) {
+    width: 1110px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// PAGE HEADER DESCRIPTION
+@mixin header-description {
+   font-size: 17px;
+   color: $blue-300;
+   letter-spacing: 1px;
+   padding-bottom: 24px;
+   margin-bottom: 24px;
+   font-weight: 100;
+}
+
+@mixin page-padding {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
