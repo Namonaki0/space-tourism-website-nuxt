@@ -81,6 +81,7 @@ onMounted(() => {
       flex-direction: row;
       align-items: center;
       width: 1110px;
+      height: 65vh;
       margin-left: auto;
       margin-right: auto;
     }
@@ -179,6 +180,10 @@ onMounted(() => {
 
     .crew-image {
       position: relative;
+
+      @media (min-width: $breakpoint-desktop) {
+        width: 32%;
+      }
 
       &::before {
         content: "";

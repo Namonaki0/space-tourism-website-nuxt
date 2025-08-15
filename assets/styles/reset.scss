@@ -87,5 +87,13 @@ input[type='number'] {
 }
 
 .template-padding-top {
-  padding-top: $padding-top-template;
+  padding-top: $padding-top-template-mobile;
+  
+  @media (min-width: $breakpoint-tablet) {
+    padding-top: $padding-top-template-tablet;
+  }
+
+  @media (min-width: $breakpoint-desktop) {
+    padding-top: $padding-top-template-desktop;
+  }
 }
