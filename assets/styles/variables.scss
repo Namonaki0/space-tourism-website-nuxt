@@ -3,6 +3,8 @@ $blue-900: #0b0d17;
 $blue-300: #d0d6f9;
 $white: #ffffff;
 $selected: #ffffff80;
+$mute-grey: #ffffff52;
+$separator: #545454;
 
 // TYPOGRAPHY
 $font-serif: 'Bellefair', serif;
@@ -10,7 +12,7 @@ $font-sans-condensed: 'Barlow Condensed', sans-serif;
 $font-sans: 'Barlow', sans-serif;
 
 // TEXT PRESETS
-$text-1: 144px normal 171.9% $font-serif;
+$text-1: 124px normal 171.9% $font-serif;
 $text-2: 100px normal 114.6% $font-serif;
 $text-3: 56px normal 64.2% $font-serif;
 $text-4: 32px normal 36.7% $font-serif;
@@ -21,7 +23,9 @@ $text-8: 16px normal 19.2% $font-sans-condensed;
 $text-9: 18px normal 180% $font-sans;
 
 // SPACING
-$padding-top-template: 200px;
+$padding-top-template-mobile: 112px;
+$padding-top-template-tablet: 182px;
+$padding-top-template-desktop: 210px;
 $spacing-1600: 128px;
 $spacing-1200: 96px;
 $spacing-1000: 80px;
